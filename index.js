@@ -6,7 +6,7 @@ var log = {
 	/**
 	 * System is unusable.
 	 */
-	emergency: notify('emergency'),
+	emergency: notify('emergency', 1),
 	
 	/**
 	 * Action must be taken immediately.
@@ -14,20 +14,20 @@ var log = {
 	 * Example: Entire website down, database unavailable, etc. This should
 	 * trigger the SMS alerts and wake you up.
 	 */
-	alert: notify('alert'),
+	alert: notify('alert', 1),
 	
 	/**
 	 * Critical conditions.
 	 *
 	 * Example: Application component unavailable, unexpected exception.
 	 */
-	critical: notify('critical'),
+	critical: notify('critical', 1),
 	
 	/**
 	 * Runtime errors that do not require immediate action but should typically
 	 * be logged and monitored.
 	 */
-	error: notify('error'),
+	error: notify('error', 1),
 	
 	/**
 	 * Exceptional occurrences that are not errors.
@@ -63,7 +63,7 @@ var log = {
 
 log.__proto__ = new EventEmitter();
 
-function notify (level) {
+function notify (level, isError) {
 	return function writeInfoLog () {
 		var callerData = callerId.getData();
 		
@@ -76,7 +76,11 @@ function notify (level) {
 
 		log.emit(level, message);
 
-		return console.log(message);
+		if (isError) {
+			console.error(message);
+		} else {
+			console.log(message);
+		}
 	};
 
 	function getMessage (args, callerData, level) {
