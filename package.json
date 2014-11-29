@@ -1,6 +1,6 @@
 {
   "name": "app-log",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Application json logger, part of app-helpers project",
   "main": "index.js",
   "scripts": {
@@ -12,7 +12,9 @@
   },
   "keywords": [
     "app-helpers",
-    "logger"
+    "logger",
+    "log",
+    "json-log"
   ],
   "author": "Egor Gumenyuk <boo1ean0807@gmail.com>",
   "license": "MIT",
