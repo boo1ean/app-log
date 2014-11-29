@@ -1,0 +1,23 @@
+{
+  "name": "app-log",
+  "version": "0.1.0",
+  "description": "Application json logger, part of app-helpers project",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/boo1ean/app-log.git"
+  },
+  "keywords": [
+    "app-helpers",
+    "logger"
+  ],
+  "author": "Egor Gumenyuk <boo1ean0807@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/boo1ean/app-log/issues"
+  },
+  "homepage": "https://github.com/boo1ean/app-log"
+}
