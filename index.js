@@ -1,5 +1,6 @@
 var _ = require('lodash');
 var callerId = require('caller-id');
+var EventEmitter = require('events').EventEmitter;
 
 var log = {
 	/**
@@ -60,6 +61,8 @@ var log = {
 	disablePrettyPrint: disablePrettyPrint
 };
 
+log.__proto__ = new EventEmitter();
+
 function notify (level) {
 	return function writeInfoLog () {
 		var callerData = callerId.getData();
@@ -69,7 +72,11 @@ function notify (level) {
 			: { noCallerData: true };
 
 		var args = Array.prototype.slice.apply(arguments);
-		return console.log(getMessage(args, callerData, level));
+		var message = getMessage(args, callerData, level);
+
+		log.emit(level, message);
+
+		return console.log(message);
 	};
 
 	function getMessage (args, callerData, level) {
@@ -91,7 +98,7 @@ function notify (level) {
 		}
 
 		function getTextMessage (args) {
-			return _.reject(args, _.isObject).join('');
+			return _.reject(args, _.isObject).join(' ');
 		}
 
 		function getMessageData (args) {
