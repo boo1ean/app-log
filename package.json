@@ -19,5 +19,9 @@
   "bugs": {
     "url": "https://github.com/boo1ean/app-log/issues"
   },
-  "homepage": "https://github.com/boo1ean/app-log"
+  "homepage": "https://github.com/boo1ean/app-log",
+  "dependencies": {
+    "caller-id": "^0.1.0",
+    "lodash": "^2.4.1"
+  }
 }
