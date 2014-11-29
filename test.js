@@ -42,4 +42,14 @@ describe('Logger', function () {
 
 		log.warning('test', { a: 1 });
 	});
+
+	it('should concat messages', function (done) {
+		log.on('notice', function (message) {
+			var obj = JSON.parse(message);
+			obj.message.should.be.exactly('hello johny 77 1');
+			done();
+		});
+
+		log.notice('hello', 'johny', 77, 1);
+	});
 });

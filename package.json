@@ -1,6 +1,6 @@
 {
   "name": "app-log",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Application json logger, part of app-helpers project",
   "main": "index.js",
   "scripts": {
