@@ -54,14 +54,16 @@ var log = {
 	 */
 	debug: notify('debug'),
 
+	events: new EventEmitter(),
 	prettyPrint: true,
 
 	catchUncaughtExceptions: catchUncaughtExceptions,
 	enablePrettyPrint: enablePrettyPrint,
-	disablePrettyPrint: disablePrettyPrint
-};
+	disablePrettyPrint: disablePrettyPrint,
 
-log.__proto__ = new EventEmitter();
+	on: onEvent,
+	emit: emitEvent
+};
 
 function notify (level, isError) {
 	return function writeInfoLog () {
@@ -153,6 +155,16 @@ function enablePrettyPrint () {
 
 function disablePrettyPrint () {
 	log.prettyPrint = false;
+}
+
+function onEvent () {
+	arguments[0] = 'level-' + arguments[0];
+	log.events.on.apply(log.events, arguments);
+}
+
+function emitEvent () {
+	arguments[0] = 'level-' + arguments[0];
+	log.events.emit.apply(log.events, arguments);
 }
 
 module.exports = log;
