@@ -4,7 +4,7 @@
   "description": "Application json logger, part of app-helpers project",
   "main": "index.js",
   "scripts": {
-    "test": "mocha"
+    "test": "./node_modules/.bin/mocha"
   },
   "repository": {
     "type": "git",
@@ -23,5 +23,9 @@
   "dependencies": {
     "caller-id": "^0.1.0",
     "lodash": "^2.4.1"
+  },
+  "devDependencies": {
+    "mocha": "^2.0.1",
+    "should": "^4.3.0"
   }
 }
