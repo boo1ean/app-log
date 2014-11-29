@@ -108,7 +108,7 @@ function notify (level, isError) {
 		}
 
 		function getMessageData (args) {
-			args = _.filter(args, _.isObject);
+			args = _.filter(args, _.isObject).map(serializeObject);
 
 			if (args.length === 1) {
 				return args[0];
@@ -117,32 +117,34 @@ function notify (level, isError) {
 			return args;
 		}
 	}
-
 }
 
 function catchUncaughtExceptions () {
 	process.on('uncaughtException', function (exception) {
-		var data = exception;
-
-		// Check if error was properly thrown
-		if (exception.stack) {
-			var stack = exception.stack.split('\n');
-
-			// First line of stack is error type + error message
-			var message = stack[0];
-
-			// Actual stacktrace
-			stack = stack.slice(1).map(trimString);
-			
-			// Data payload for log
-			var data = {
-				message: message,
-				stacktrace: stack
-			};
-		}
-
-		log.alert('Uncaught exception', data);
+		log.alert('Uncaught exception', serializeObject(exception));
 	});
+}
+
+// Check if obejct is exception and uses some extra serialization strategy for that
+function serializeObject (obj) {
+	// Check if error was properly thrown
+	if (obj.stack) {
+		var stack = obj.stack.split('\n');
+
+		// First line of stack is error type + error message
+		var message = stack[0];
+
+		// Actual stacktrace
+		stack = stack.slice(1).map(trimString);
+
+		// Data payload for log
+		return {
+			message: message,
+			stacktrace: stack
+		};
+	}
+
+	return obj;
 
 	function trimString (string) {
 		return string.trim();
