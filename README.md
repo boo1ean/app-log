@@ -17,18 +17,21 @@ var log = require('app-log');
 
 function createUser() {
 	var user = { email: 'john@example.com', name: 'john' };
-	log.info('New user created', user);
+	log.info('New user created with email', user.email, user);
 }
 
 createUser();
 
+// Concat all scalar values (strings, numbers) with spaces,
+// and aggregate all objects to `data` property
+
 // {
 //   "functionName": "createUser",
 //   "filePath": "/Users/boo1ean/src/app-log/stuff.js",
-//   "lineNumber": 5,
+//   "lineNumber": 6,
 //   "level": "info",
-//   "time": "2014-11-29T13:37:38.136Z",
-//   "message": "New user created",
+//   "time": "2014-11-29T14:01:23.253Z",
+//   "message": "New user created with email john@example.com",
 //   "data": {
 //     "email": "john@example.com",
 //     "name": "john"
