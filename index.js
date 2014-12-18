@@ -67,7 +67,11 @@ var log = {
 
 function notify (level, isError) {
 	return function writeInfoLog () {
-		var callerData = callerId.getData();
+		try {
+			var callerData = callerId.getData();
+		} catch (e) {
+			var callerData = {};
+		}
 		
 		callerData = callerData
 			? _.pick(callerData, ['functionName', 'filePath', 'lineNumber'])
